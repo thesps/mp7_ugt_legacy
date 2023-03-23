@@ -195,23 +195,23 @@ double hwint_to_anomaly_score(std::vector<int> in){
 // 'bridge' function for Python binding (not for firmware)
 double objects_to_anomaly_score(ETMiss etMiss, std::vector<EGamma> egammas, std::vector<Muon> muons, std::vector<Jet> jets){
 
-    assert((void("Wrong number of inputs"), egammas.size() == AD_NEGAMMAS));
-    assert((void("Wrong number of inputs"), muons.size() == AD_NMUONS));
-    assert((void("Wrong number of inputs"), jets.size() == AD_NJETS));
+    assert((void("Wrong number of inputs"), egammas.size() <= AD_NEGAMMAS));
+    assert((void("Wrong number of inputs"), muons.size() <= AD_NMUONS));
+    assert((void("Wrong number of inputs"), jets.size() <= AD_NJETS));
     // Convert ints to GT objects
     EGamma egammas_int[NEGAMMAS];
     Muon muons_int[NMUONS];
     Jet jets_int[NJETS];
     for(int i = 0; i < NEGAMMAS; i++){
-        if(i < AD_NEGAMMAS){ egammas_int[i] = egammas[i]; }
+        if(i < egammas.size()){ egammas_int[i] = egammas[i]; }
         else{ egammas_int[i].clear(); }
     }
     for(int i = 0; i < NMUONS; i++){
-        if(i < AD_NMUONS){ muons_int[i] = muons[i]; }
+        if(i < muons.size()){ muons_int[i] = muons[i]; }
         else{ muons_int[i].clear(); }
     }
     for(int i = 0; i < NJETS; i++){
-        if(i < AD_NJETS){ jets_int[i] = jets[i]; }
+        if(i < jets.size()){ jets_int[i] = jets[i]; }
         else{ jets_int[i].clear(); }
     }
 
@@ -253,6 +253,38 @@ AD_NN_OUT_SQ_T nn_loss(std::vector<AD_NN_OUT_T> in){
     return loss;
 }
 
+// 'bridge' function for Python binding (not for firmware)
+double packed_to_anomaly_score(uint64_t etMiss, std::vector<uint64_t> egammas, std::vector<uint64_t> muons, std::vector<uint64_t> jets){
+
+    assert((void("Wrong number of inputs"), egammas.size() <= AD_NEGAMMAS));
+    assert((void("Wrong number of inputs"), muons.size() <= AD_NMUONS));
+    assert((void("Wrong number of inputs"), jets.size() <= AD_NJETS));
+    // Convert ints to GT objects
+    ETMiss etmiss_int;
+    etmiss_int = ETMiss::unpack(etMiss);
+    EGamma egammas_int[NEGAMMAS];
+    Muon muons_int[NMUONS];
+    Jet jets_int[NJETS];
+    for(int i = 0; i < NEGAMMAS; i++){
+        if(i < egammas.size()){ egammas_int[i] = EGamma::unpack(egammas[i]); }
+        else{ egammas_int[i].clear(); }
+    }
+    for(int i = 0; i < NMUONS; i++){
+        if(i < muons.size()){ muons_int[i] = Muon::unpack(muons[i]); }
+        else{ muons_int[i].clear(); }
+    }
+    for(int i = 0; i < NJETS; i++){
+        if(i < jets.size()){ jets_int[i] = Jet::unpack(jets[i]); }
+        else{ jets_int[i].clear(); }
+    }
+
+    // the unused inputs
+    Tau taus[NTAUS]; ET et; HT ht; HTMiss htmiss; ETHFMiss ethfmiss; HTHFMiss hthfmiss; 
+    AD_NN_OUT_SQ_T score;
+    anomaly_detection(muons_int, jets_int, egammas_int, taus, et, ht, etmiss_int, htmiss, ethfmiss, hthfmiss, score);
+    return (double) score;
+}
+
 namespace py = pybind11;
 PYBIND11_MODULE(anomaly_detection_emulation, m){
   m.doc() = "Python bindings for Anomaly Detection at L1T HLS for emulation. Most methods assume an object ordering: ETMiss, 4*EGamma, 4*Muon, 10*Jet";
@@ -261,6 +293,7 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
   m.def("packed_to_hwint", &packed_to_hwint, "Packed into GT inputs to (pt, eta, phi)");
   m.def("hwint_to_anomaly_score", &hwint_to_anomaly_score, "GT inputs (in integer hardware units) to anomaly score");
   m.def("objects_to_anomaly_score", &objects_to_anomaly_score, "GT inputs (in integer hardware units) to anomaly score");
+  m.def("packed_to_anomaly_score", &packed_to_anomaly_score, "Packed GT inputs (in integer hardware units) to anomaly score");
   //m.def("scale_nn_inputs", &scale_nn_inputs, "inputs to scaled NN inputs (in doubles");
   m.def("nn", &nn, "Scaled NN inputs (in doubles) to NN outputs (in doubles)");
   m.def("nn_loss", &nn_loss, "NN outputs (in doubles) to NN loss score from computeLoss (in doubles)");
@@ -275,6 +308,7 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
     .def_readwrite("eta_extrapolated", &Muon::eta_extrapolated)
     .def_readwrite("phi_extrapolated", &Muon::phi_extrapolated)
     .def("initFromHWInt", &Muon::initFromHWInt)
+    .def("initFromPhysicalDoubles", &Muon::initFromPhysicalDoubles)
     .def("pack", &Muon::pack)
     .def("unpack", &Muon::unpack);
 
@@ -283,6 +317,7 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
     .def_readwrite("eta", &EGamma::eta)
     .def_readwrite("phi", &EGamma::phi)
     .def("initFromHWInt", &EGamma::initFromHWInt)
+    .def("initFromPhysicalDoubles", &EGamma::initFromPhysicalDoubles)
     .def("pack", &EGamma::pack)
     .def("unpack", &EGamma::unpack);
 
@@ -291,6 +326,7 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
     .def_readwrite("eta", &Jet::eta)
     .def_readwrite("phi", &Jet::phi)
     .def("initFromHWInt", &Jet::initFromHWInt)
+    .def("initFromPhysicalDoubles", &Jet::initFromPhysicalDoubles)
     .def("pack", &Jet::pack)
     .def("unpack", &Jet::unpack);
 
@@ -298,6 +334,7 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
     .def_readwrite("et", &ETMiss::et)
     .def_readwrite("phi", &ETMiss::phi)
     .def("initFromHWInt", &ETMiss::initFromHWInt)
+    .def("initFromPhysicalDoubles", &ETMiss::initFromPhysicalDoubles)
     .def("pack", &ETMiss::pack)
     .def("unpack", &ETMiss::unpack);
 
