@@ -1,5 +1,5 @@
-#ifndef PARAMETERS_H_
-#define PARAMETERS_H_
+#ifndef TOPO_PARAMETERS_H_
+#define TOPO_PARAMETERS_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -7,10 +7,7 @@
 #include "nnet_utils/nnet_helpers.h"
 //hls-fpga-machine-learning insert includes
 #include "nnet_utils/nnet_activation.h"
-#include "nnet_utils/nnet_activation_stream.h"
 #include "nnet_utils/nnet_dense.h"
-#include "nnet_utils/nnet_dense_compressed.h"
-#include "nnet_utils/nnet_dense_stream.h"
  
 //hls-fpga-machine-learning insert weights
 #include "weights/w2.h"
@@ -33,8 +30,8 @@ struct config2 : nnet::dense_config {
     typedef bias2_t bias_t;
     typedef weight2_t weight_t;
     typedef ap_uint<1> index_t;
-    template<class x_T, class y_T, class res_T>
-    using product = nnet::product::mult<x_T, y_T, res_T>;
+    template<class x_T, class y_T>
+    using product = nnet::product::mult<x_T, y_T>;
 };
 
 // newfwkbothchannel_small_compressed0_fc1_linear
@@ -69,8 +66,8 @@ struct config5 : nnet::dense_config {
     typedef bias5_t bias_t;
     typedef weight5_t weight_t;
     typedef ap_uint<1> index_t;
-    template<class x_T, class y_T, class res_T>
-    using product = nnet::product::mult<x_T, y_T, res_T>;
+    template<class x_T, class y_T>
+    using product = nnet::product::mult<x_T, y_T>;
 };
 
 // newfwkbothchannel_small_compressed0_output_linear

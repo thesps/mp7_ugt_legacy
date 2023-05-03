@@ -1,7 +1,7 @@
 #include "topo_trigger.h"
 #include <stddef.h>
 #include "NN/TOPO_HLS.h"
-#include "NN/nnet_utils/nnet_common.h"
+#include "nnet_utils/nnet_common.h"
 #include "scales.h"
 
 void scaleNNInputs(unscaled_t unscaled[TPT_NNNINPUTS], TPT_NN_IN_T scaled[TPT_NNNINPUTS])
@@ -24,25 +24,25 @@ void scaleNNInputs(unscaled_t unscaled[TPT_NNNINPUTS], TPT_NN_IN_T scaled[TPT_NN
 void unroll_particles(Muon muons[NMUONS], Jet jets[NJETS], EGamma egammas[NEGAMMAS], Tau taus[NTAUS], ET et, HT ht, ETMiss etmiss, HTMiss htmiss, ETHFMiss ethfmiss, HTHFMiss hthfmiss, unscaled_t nn_inputs_unscaled[TPT_NNNINPUTS])
 {
     
-    nn_inputs_unscaled[0] = etmiss.et.bits_to_uint64();
+    nn_inputs_unscaled[0] = etmiss.et * 2;
     nn_inputs_unscaled[1] = etmiss.phi;
 
     int iNNIn = 0;
     for (int i = 0; i < TPT_NJETS; ++i, ++iNNIn) {
 #pragma HLS unroll
-        nn_inputs_unscaled[3 * iNNIn + 2] = jets[i].et.bits_to_uint64();
+        nn_inputs_unscaled[3 * iNNIn + 2] = jets[i].et * 2;
         nn_inputs_unscaled[3 * iNNIn + 3] = jets[i].eta;
         nn_inputs_unscaled[3 * iNNIn + 4] = jets[i].phi;
     }
     for (int i = 0; i < TPT_NMUONS; ++i, ++iNNIn) {
 #pragma HLS unroll
-        nn_inputs_unscaled[3 * iNNIn + 2] = muons[i].pt.bits_to_uint64();
+        nn_inputs_unscaled[3 * iNNIn + 2] = muons[i].pt * 2;
         nn_inputs_unscaled[3 * iNNIn + 3] = muons[i].eta_extrapolated;
         nn_inputs_unscaled[3 * iNNIn + 4] = muons[i].phi_extrapolated;
     }
     for (int i = 0; i < TPT_NEGAMMAS; ++i, ++iNNIn) {
 #pragma HLS unroll
-        nn_inputs_unscaled[3 * iNNIn + 2] = egammas[i].et.bits_to_uint64();
+        nn_inputs_unscaled[3 * iNNIn + 2] = egammas[i].et * 2;
         nn_inputs_unscaled[3 * iNNIn + 3] = egammas[i].eta;
         nn_inputs_unscaled[3 * iNNIn + 4] = egammas[i].phi;
     }

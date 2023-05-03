@@ -21,6 +21,8 @@
 #include "TOPO_HLS.h"
 #include "parameters.h"
 
+using namespace TOPO;
+
 void TOPO_HLS(
     input_t newfwkbothchannel_small_compressed0_fc1_input[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_5],
@@ -41,10 +43,10 @@ void TOPO_HLS(
     static bool loaded_weights = false;
     if (!loaded_weights) {
         //hls-fpga-machine-learning insert load weights
-        nnet::load_weights_from_txt<weight2_t, 1664>(w2, "w2.txt");
-        nnet::load_weights_from_txt<bias2_t, 64>(b2, "b2.txt");
-        nnet::load_weights_from_txt<weight5_t, 64>(w5, "w5.txt");
-        nnet::load_weights_from_txt<bias5_t, 1>(b5, "b5.txt");
+        nnet::load_weights_from_txt<weight2_t, 1664>(w2, TOPO_WEIGHTS_DIR, "w2.txt");
+        nnet::load_weights_from_txt<bias2_t, 64>(b2, TOPO_WEIGHTS_DIR, "b2.txt");
+        nnet::load_weights_from_txt<weight5_t, 64>(w5, TOPO_WEIGHTS_DIR, "w5.txt");
+        nnet::load_weights_from_txt<bias5_t, 1>(b5, TOPO_WEIGHTS_DIR, "b5.txt");
         loaded_weights = true;
     }
 #endif

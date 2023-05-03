@@ -34,14 +34,10 @@ namespace nnet {
 
 #ifndef __SYNTHESIS__
 
-#ifndef WEIGHTS_DIR
-#define WEIGHTS_DIR "../../../../NN/weights"
-#endif
-
 template<class T, size_t SIZE>
-void load_weights_from_txt(T *w, const char* fname) {
+void load_weights_from_txt(T *w, const char* weights_dir, const char* fname) {
 
-    std::string full_path = std::string(WEIGHTS_DIR) + "/" + std::string(fname);
+    std::string full_path = std::string(weights_dir) + "/" + std::string(fname);
     std::ifstream infile(full_path.c_str(), std::ios::binary);
 
     if (infile.fail()) {
@@ -68,9 +64,9 @@ void load_weights_from_txt(T *w, const char* fname) {
 }
 
 template<class T, size_t SIZE>
-void load_compressed_weights_from_txt(T *w, const char* fname) {
+void load_compressed_weights_from_txt(T *w, const char* weights_dir, const char* fname) {
 
-    std::string full_path = std::string(WEIGHTS_DIR) + "/" + std::string(fname);
+    std::string full_path = std::string(weights_dir) + "/" + std::string(fname);
     std::ifstream infile(full_path.c_str(), std::ios::binary);
 
     if (infile.fail()) {
@@ -114,9 +110,9 @@ void load_compressed_weights_from_txt(T *w, const char* fname) {
 }
 
 template<class T, size_t SIZE>
-void load_exponent_weights_from_txt(T *w, const char* fname) {
+void load_exponent_weights_from_txt(T *w, const char* weights_dir, const char* fname) {
 
-    std::string full_path = std::string(WEIGHTS_DIR) + "/" + std::string(fname);
+    std::string full_path = std::string(weights_dir) + "/" + std::string(fname);
     std::ifstream infile(full_path.c_str(), std::ios::binary);
 
     if (infile.fail()) {

@@ -1,5 +1,5 @@
-#ifndef DEFINES_H_
-#define DEFINES_H_
+#ifndef ADT_DEFINES_H_
+#define ADT_DEFINES_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -12,6 +12,10 @@
 #define N_LAYER_2 32
 #define N_LAYER_4 16
 #define N_LAYER_6 13
+
+#ifndef ADT_WEIGHTS_DIR
+#define ADT_WEIGHTS_DIR "./weights/"
+#endif
 
 //hls-fpga-machine-learning insert layer-precision
 typedef ap_fixed<11,6> input_1_accum_t;

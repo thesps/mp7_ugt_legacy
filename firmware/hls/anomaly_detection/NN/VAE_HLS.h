@@ -17,8 +17,8 @@
 //    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-#ifndef VAE_HLS_H_
-#define VAE_HLS_H_
+#ifndef ADT_VAE_HLS_H_
+#define ADT_VAE_HLS_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"

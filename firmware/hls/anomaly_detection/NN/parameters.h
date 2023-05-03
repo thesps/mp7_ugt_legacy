@@ -1,5 +1,5 @@
-#ifndef PARAMETERS_H_
-#define PARAMETERS_H_
+#ifndef ADT_PARAMETERS_H_
+#define ADT_PARAMETERS_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"

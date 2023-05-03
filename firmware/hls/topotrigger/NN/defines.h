@@ -1,5 +1,5 @@
-#ifndef DEFINES_H_
-#define DEFINES_H_
+#ifndef TOPO_DEFINES_H_
+#define TOPO_DEFINES_H_
 
 #include "ap_int.h"
 #include "ap_fixed.h"
@@ -11,6 +11,10 @@
 #define N_INPUT_1_1 26
 #define N_LAYER_2 64
 #define N_LAYER_5 1
+
+#ifndef TOPO_WEIGHTS_DIR
+#define TOPO_WEIGHTS_DIR "./weights/"
+#endif
 
 //hls-fpga-machine-learning insert layer-precision
 typedef ap_fixed<16,6> model_default_t;

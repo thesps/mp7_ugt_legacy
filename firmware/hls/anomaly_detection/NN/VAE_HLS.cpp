@@ -21,6 +21,8 @@
 #include "VAE_HLS.h"
 #include "parameters.h"
 
+using namespace ADT;
+
 void VAE_HLS(
     input_t input_1[N_INPUT_1_1],
     result_t layer7_out[N_LAYER_6]
@@ -36,12 +38,12 @@ void VAE_HLS(
     static bool loaded_weights = false;
     if (!loaded_weights) {
         //hls-fpga-machine-learning insert load weights
-        nnet::load_weights_from_txt<weight2_t, 1824>(w2, "w2.txt");
-        nnet::load_weights_from_txt<bias2_t, 32>(b2, "b2.txt");
-        nnet::load_weights_from_txt<weight4_t, 512>(w4, "w4.txt");
-        nnet::load_weights_from_txt<bias4_t, 16>(b4, "b4.txt");
-        nnet::load_weights_from_txt<weight6_t, 208>(w6, "w6.txt");
-        nnet::load_weights_from_txt<bias6_t, 13>(b6, "b6.txt");
+        nnet::load_weights_from_txt<weight2_t, 1824>(w2, ADT_WEIGHTS_DIR, "w2.txt");
+        nnet::load_weights_from_txt<bias2_t, 32>(b2, ADT_WEIGHTS_DIR, "b2.txt");
+        nnet::load_weights_from_txt<weight4_t, 512>(w4, ADT_WEIGHTS_DIR, "w4.txt");
+        nnet::load_weights_from_txt<bias4_t, 16>(b4, ADT_WEIGHTS_DIR, "b4.txt");
+        nnet::load_weights_from_txt<weight6_t, 208>(w6, ADT_WEIGHTS_DIR, "w6.txt");
+        nnet::load_weights_from_txt<bias6_t, 13>(b6, ADT_WEIGHTS_DIR, "b6.txt");
         loaded_weights = true;
     }
 #endif

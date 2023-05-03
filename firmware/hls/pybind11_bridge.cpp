@@ -1,5 +1,4 @@
-#include "anomaly_detection/anomaly_detection.h"
-#include "anomaly_detection/NN/VAE_HLS.h"
+#include "data_types.h"
 #include "ap_fixed.h"
 #include <vector>
 #include <cassert>
@@ -8,8 +7,8 @@
 
 // 'bridge' function for Python binding (not for firmware)
 
-void hwint_to_GTobjects(std::vector<int> in, ETMiss& etMiss, EGamma egammas[AD_NEGAMMAS], Muon muons[AD_NMUONS], Jet jets[AD_NJETS]){
-    assert((void("Wrong number of inputs"), in.size() == 3*(AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
+void hwint_to_GTobjects(std::vector<int> in, int negammas, int nmuons, int njets, ETMiss& etMiss, EGamma* egammas, Muon* muons, Jet* jets){
+    assert((void("Wrong number of inputs"), in.size() == 3*(negammas+nmuons+njets+1)));
     // convert ETMiss
     // note ETMiss eta expected at in[1], but not used
     etMiss.clear();
@@ -17,77 +16,77 @@ void hwint_to_GTobjects(std::vector<int> in, ETMiss& etMiss, EGamma egammas[AD_N
     etMiss.phi.V = in[2];
 
     // convert EGamma
-    for(int i = 0; i < AD_NEGAMMAS; i++){
+    for(int i = 0; i < negammas; i++){
         egammas[i] = EGamma::initFromHWInt(in[3*(1 + i) + 0], in[3*(1 + i) + 1], in[3*(1 + i) + 2]);
     }
 
     // convert Muon
-    for(int i = 0; i < AD_NMUONS; i++){
-        muons[i] = Muon::initFromHWInt(in[3*(1+AD_NEGAMMAS+i) + 0], in[3*(1+AD_NEGAMMAS+i) + 1], in[3*(1+AD_NEGAMMAS+i) + 2]);
+    for(int i = 0; i < nmuons; i++){
+        muons[i] = Muon::initFromHWInt(in[3*(1+negammas+i) + 0], in[3*(1+negammas+i) + 1], in[3*(1+negammas+i) + 2]);
     }
 
     // convert Jet
-    for(int i = 0; i < AD_NJETS; i++){
-        jets[i] = Jet::initFromHWInt(in[3*(1+AD_NEGAMMAS+AD_NMUONS+i) + 0], in[3*(1+AD_NEGAMMAS+AD_NMUONS+i) + 1], in[3*(1+AD_NEGAMMAS+AD_NMUONS+i) + 2]);
+    for(int i = 0; i < njets; i++){
+        jets[i] = Jet::initFromHWInt(in[3*(1+negammas+nmuons+i) + 0], in[3*(1+negammas+nmuons+i) + 1], in[3*(1+negammas+nmuons+i) + 2]);
     }
 }
 
-void packed_to_GTObjects(std::vector<uint64_t> in, ETMiss& etMiss, EGamma egammas[AD_NEGAMMAS], Muon muons[AD_NMUONS], Jet jets[AD_NJETS]){
-    assert((void("Wrong number of inputs"), in.size() == (AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
+void packed_to_GTObjects(std::vector<uint64_t> in, int negammas, int nmuons, int njets, ETMiss& etMiss, EGamma* egammas, Muon* muons, Jet* jets){
+    assert((void("Wrong number of inputs"), in.size() == (negammas+nmuons+njets+1)));
     // convert ETMiss
     // note ETMiss eta expected at in[1], but not used
     etMiss.initFromBits(in[0]);
 
     // convert EGamma
-    for(int i = 0; i < AD_NEGAMMAS; i++){
+    for(int i = 0; i < negammas; i++){
         egammas[i].initFromBits(in[1 + i]);
     }
 
     // convert Muon
-    for(int i = 0; i < AD_NMUONS; i++){
-        muons[i].initFromBits(in[1+AD_NEGAMMAS+i]);
+    for(int i = 0; i < nmuons; i++){
+        muons[i].initFromBits(in[1+negammas+i]);
     }
 
     // convert Jet
-    for(int i = 0; i < AD_NJETS; i++){
-        jets[i].initFromBits(in[1+AD_NEGAMMAS+AD_NMUONS+i]);
+    for(int i = 0; i < njets; i++){
+        jets[i].initFromBits(in[1+negammas+nmuons+i]);
     }
 }
 
 // 'bridge' function for Python binding (not for firmware)
-std::vector<double> hwint_to_physical(std::vector<int> in){
+std::vector<double> hwint_to_physical(std::vector<int> in, int negammas, int nmuons, int njets){
 
-    assert((void("Wrong number of inputs"), in.size() == 3*(AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
+    assert((void("Wrong number of inputs"), in.size() == 3*(negammas+nmuons+njets+1)));
     // read (pT, eta, phi) for each of (in order): MET, electrons, muons, jets
     std::vector<double> phys;
 
     // Convert ints to GT objects
     ETMiss etMiss;
-    EGamma egammas[AD_NEGAMMAS];
-    Muon muons[AD_NMUONS];
-    Jet jets[AD_NJETS];
-    hwint_to_GTobjects(in, etMiss, egammas, muons, jets);
+    EGamma egammas[negammas];
+    Muon muons[NMUONS];
+    Jet jets[NJETS];
+    hwint_to_GTobjects(in, negammas, nmuons, njets, etMiss, egammas, muons, jets);
 
     phys.push_back(etMiss.et);
     phys.push_back(0.);
     phys.push_back(etMiss.phi * Scales::CALO_PHI_LSB);
 
     // convert EGamma
-    for(int i = 0; i < AD_NEGAMMAS; i++){
+    for(int i = 0; i < negammas; i++){
         phys.push_back(egammas[i].et);
         phys.push_back(egammas[i].eta * Scales::CALO_ETA_LSB);
         phys.push_back(egammas[i].phi * Scales::CALO_PHI_LSB);
     }
 
     // convert Muon
-    for(int i = 0; i < AD_NMUONS; i++){
+    for(int i = 0; i < nmuons; i++){
         phys.push_back(muons[i].pt);
         phys.push_back(muons[i].eta_extrapolated * Scales::MUON_ETA_LSB);
         phys.push_back(muons[i].phi_extrapolated * Scales::MUON_PHI_LSB);
     }
 
     // convert Jet
-    for(int i = 0; i < AD_NJETS; i++){
+    for(int i = 0; i < njets; i++){
         phys.push_back(jets[i].et);
         phys.push_back(jets[i].eta * Scales::CALO_ETA_LSB);
         phys.push_back(jets[i].phi * Scales::CALO_PHI_LSB);
@@ -96,52 +95,51 @@ std::vector<double> hwint_to_physical(std::vector<int> in){
 }
 
 // 'bridge' function for Python binding (not for firmware)
-std::vector<uint64_t> hwint_to_packed(std::vector<int> in){
+std::vector<uint64_t> hwint_to_packed(std::vector<int> in, int negammas, int nmuons, int njets){
 
-    assert((void("Wrong number of inputs"), in.size() == 3*(AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
+    assert((void("Wrong number of inputs"), in.size() == 3*(negammas+nmuons+njets+1)));
     // read (pT, eta, phi) for each of (in order): MET, electrons, muons, jets
     // return their packed bits
 
     // Convert ints to GT objects
     ETMiss etMiss;
-    EGamma egammas[AD_NEGAMMAS];
-    Muon muons[AD_NMUONS];
-    Jet jets[AD_NJETS];
-    hwint_to_GTobjects(in, etMiss, egammas, muons, jets);
+    EGamma egammas[negammas];
+    Muon muons[nmuons];
+    Jet jets[njets];
+    hwint_to_GTobjects(in, negammas, nmuons, njets, etMiss, egammas, muons, jets);
 
     std::vector<uint64_t> out;
 
     out.push_back(etMiss.pack());
     // write EGamma
-    for(int i = 0; i < AD_NEGAMMAS; i++){
+    for(int i = 0; i < negammas; i++){
         out.push_back(egammas[i].pack());
     }
 
     // convert Muon
-    for(int i = 0; i < AD_NMUONS; i++){
+    for(int i = 0; i < nmuons; i++){
         out.push_back(muons[i].pack());
     }
 
     // convert Jet
-    for(int i = 0; i < AD_NJETS; i++){
+    for(int i = 0; i < njets; i++){
         out.push_back(jets[i].pack());
     }
     return out;
 }
 
 // 'bridge' function for Python binding (not for firmware)
-std::vector<int> packed_to_hwint(std::vector<uint64_t> in){
-
-    assert((void("Wrong number of inputs"), in.size() == (AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
+std::vector<int> packed_to_hwint(std::vector<uint64_t> in, int negammas, int nmuons, int njets){
+    assert((void("Wrong number of inputs"), in.size() == (negammas+nmuons+njets+1)));
     // read packed integers for each of (in order): MET, electrons, muons, jets
     // return their packed bits
 
     // Convert ints to GT objects
     ETMiss etMiss;
-    EGamma egammas[AD_NEGAMMAS];
-    Muon muons[AD_NMUONS];
-    Jet jets[AD_NJETS];
-    packed_to_GTObjects(in, etMiss, egammas, muons, jets);
+    EGamma egammas[negammas];
+    Muon muons[nmuons];
+    Jet jets[njets];
+    packed_to_GTObjects(in, negammas, nmuons, njets, etMiss, egammas, muons, jets);
 
     std::vector<int> out;
 
@@ -150,21 +148,21 @@ std::vector<int> packed_to_hwint(std::vector<uint64_t> in){
     out.push_back(etMiss.phi.V);
 
     // write EGamma
-    for(int i = 0; i < AD_NEGAMMAS; i++){
+    for(int i = 0; i < negammas; i++){
         out.push_back(egammas[i].et.V);
         out.push_back(egammas[i].eta.V);
         out.push_back(egammas[i].phi.V);
     }
 
     // convert Muon
-    for(int i = 0; i < AD_NMUONS; i++){
+    for(int i = 0; i < nmuons; i++){
         out.push_back(muons[i].pt.V);
         out.push_back(muons[i].eta_extrapolated.V);
         out.push_back(muons[i].phi_extrapolated.V);
     }
 
     // convert Jet
-    for(int i = 0; i < AD_NJETS; i++){
+    for(int i = 0; i < njets; i++){
         out.push_back(jets[i].et.V);
         out.push_back(jets[i].eta.V);
         out.push_back(jets[i].phi.V);
@@ -172,98 +170,16 @@ std::vector<int> packed_to_hwint(std::vector<uint64_t> in){
     return out;
 }
 
-// 'bridge' function for Python binding (not for firmware)
-double hwint_to_anomaly_score(std::vector<int> in){
-
-    assert((void("Wrong number of inputs"), in.size() == 3*(AD_NEGAMMAS+AD_NMUONS+AD_NJETS+1)));
-    // read (pT, eta, phi) for each of (in order): MET, electrons, muons, jets
-
-    // Convert ints to GT objects
-    ETMiss etMiss;
-    EGamma egammas[NEGAMMAS];
-    Muon muons[NMUONS];
-    Jet jets[NJETS];
-    hwint_to_GTobjects(in, etMiss, egammas, muons, jets);
-
-    // the unused inputs
-    Tau taus[NTAUS]; ET et; HT ht; HTMiss htmiss; ETHFMiss ethfmiss; HTHFMiss hthfmiss; 
-    AD_NN_OUT_SQ_T score;
-    anomaly_detection(muons, jets, egammas, taus, et, ht, etMiss, htmiss, ethfmiss, hthfmiss, score);
-    return (double) score;
-}
-
-// 'bridge' function for Python binding (not for firmware)
-double objects_to_anomaly_score(ETMiss etMiss, std::vector<EGamma> egammas, std::vector<Muon> muons, std::vector<Jet> jets){
-
-    assert((void("Wrong number of inputs"), egammas.size() == AD_NEGAMMAS));
-    assert((void("Wrong number of inputs"), muons.size() == AD_NMUONS));
-    assert((void("Wrong number of inputs"), jets.size() == AD_NJETS));
-    // Convert ints to GT objects
-    EGamma egammas_int[NEGAMMAS];
-    Muon muons_int[NMUONS];
-    Jet jets_int[NJETS];
-    for(int i = 0; i < NEGAMMAS; i++){
-        if(i < AD_NEGAMMAS){ egammas_int[i] = egammas[i]; }
-        else{ egammas_int[i].clear(); }
-    }
-    for(int i = 0; i < NMUONS; i++){
-        if(i < AD_NMUONS){ muons_int[i] = muons[i]; }
-        else{ muons_int[i].clear(); }
-    }
-    for(int i = 0; i < NJETS; i++){
-        if(i < AD_NJETS){ jets_int[i] = jets[i]; }
-        else{ jets_int[i].clear(); }
-    }
-
-    // the unused inputs
-    Tau taus[NTAUS]; ET et; HT ht; HTMiss htmiss; ETHFMiss ethfmiss; HTHFMiss hthfmiss; 
-    AD_NN_OUT_SQ_T score;
-    anomaly_detection(muons_int, jets_int, egammas_int, taus, et, ht, etMiss, htmiss, ethfmiss, hthfmiss, score);
-    return (double) score;
-}
-
-/*std::vector<AD_NN_IN_T> scale_nn_inputs(std::vector<unscaled_t> unscaled){
-    assert((void("Wrong number of inputs"), unscaled.size() == AD_NNNPARTICLES));
-    AD_NN_IN_T scaled[AD_NNNINPUTS];
-    unscaled_t* unscaled_arr = unscaled.data();
-    scaleNNInputs(unscaled_arr, scaled);
-    std::vector<AD_NN_IN_T> out(std::begin(scaled), std::end(scaled));
-    return out;
-    }*/
-
-std::vector<AD_NN_OUT_T> nn(std::vector<AD_NN_IN_T> in){
-    assert((void("Wrong number of inputs"), in.size() == AD_NNNINPUTS));
-    AD_NN_IN_T nn_inputs[AD_NNNINPUTS];
-    for(int i = 0; i < AD_NNNINPUTS; i++){
-        nn_inputs[i] = in[i];
-    }
-    AD_NN_OUT_T nn_outputs[AD_NNNOUTPUTS];
-    VAE_HLS(nn_inputs, nn_outputs);
-    std::vector<AD_NN_OUT_T> out(std::begin(nn_outputs), std::end(nn_outputs));
-    return out;
-}
-
-AD_NN_OUT_SQ_T nn_loss(std::vector<AD_NN_OUT_T> in){
-    assert((void("Wrong number of inputs"), in.size() == AD_NNNOUTPUTS));
-    AD_NN_OUT_T nn_outputs[AD_NNNOUTPUTS];
-    for(int i = 0; i < AD_NNNOUTPUTS; i++){
-        nn_outputs[i] = in[i];
-    }
-    AD_NN_OUT_SQ_T loss = computeLoss(nn_outputs);
-    return loss;
-}
-
 namespace py = pybind11;
-PYBIND11_MODULE(anomaly_detection_emulation, m){
+
+void bind_anomaly_detection(py::module &m);
+void bind_topo_trigger(py::module &m);
+
+PYBIND11_MODULE(ugt_hls, m){
     m.doc() = "Python bindings for Anomaly Detection at L1T HLS for emulation. Most methods assume an object ordering: ETMiss, 4*EGamma, 4*Muon, 10*Jet";
     m.def("hwint_to_physical", &hwint_to_physical, "GT inputs (in integer hardware units) to physical units");
     m.def("hwint_to_packed", &hwint_to_packed, "GT inputs to packed integers");
     m.def("packed_to_hwint", &packed_to_hwint, "Packed into GT inputs to (pt, eta, phi)");
-    m.def("hwint_to_anomaly_score", &hwint_to_anomaly_score, "GT inputs (in integer hardware units) to anomaly score");
-    m.def("objects_to_anomaly_score", &objects_to_anomaly_score, "GT inputs (in integer hardware units) to anomaly score");
-    //m.def("scale_nn_inputs", &scale_nn_inputs, "inputs to scaled NN inputs (in doubles");
-    m.def("nn", &nn, "Scaled NN inputs (in doubles) to NN outputs (in doubles)");
-    m.def("nn_loss", &nn_loss, "NN outputs (in doubles) to NN loss score from computeLoss (in doubles)");
   
     py::class_<PxPyPz>(m, "PxPyPz")
 	.def_readwrite("px", &PxPyPz::px)
@@ -301,13 +217,13 @@ PYBIND11_MODULE(anomaly_detection_emulation, m){
 	.def("pack", &ETMiss::pack)
 	.def("unpack", &ETMiss::unpack);
 
-    m.attr("AD_NMUONS") = &AD_NMUONS;
-    m.attr("AD_NJETS") = &AD_NJETS;
-    m.attr("AD_NEGAMMAS") = &AD_NEGAMMAS;
-    m.attr("AD_NTAUS") = &AD_NTAUS;
-    m.attr("AD_NNNPARTICLES") = &AD_NNNPARTICLES;
-    m.attr("AD_NNNINPUTS") = &AD_NNNINPUTS;
-    m.attr("AD_NNNOUTPUTS") = &AD_NNNOUTPUTS;
+    m.attr("GT_NMUONS") = &NMUONS;
+    m.attr("GT_NJETS") = &NJETS;
+    m.attr("GT_NEGAMMAS") = &NEGAMMAS;
+    m.attr("GT_NTAUS") = &NTAUS;
+
+    bind_anomaly_detection(m);
+    bind_topo_trigger(m);
 }
 
 /* 

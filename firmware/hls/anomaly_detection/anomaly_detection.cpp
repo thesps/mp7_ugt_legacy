@@ -1,7 +1,7 @@
 #include "anomaly_detection.h"
 #include <stddef.h>
 #include "NN/VAE_HLS.h"
-#include "NN/nnet_utils/nnet_common.h"
+#include "nnet_utils/nnet_common.h"
 #include "scales.h"
 
 AD_NN_OUT_SQ_T computeLoss(AD_NN_OUT_T score[AD_NNNOUTPUTS])
