@@ -13,7 +13,7 @@ static const int AD_NTAUS = 4;
 
 static const int AD_NNNPARTICLES = 19;
 static const int AD_NNNINPUTS = 57;
-static const int AD_NNNOUTPUTS = 13;
+static const int AD_NNNOUTPUTS = 8;
 
 // Assumed type for NN inputs (px, py, pz in GeV)
 // typedef ap_fixed<8,8,AP_RND_CONV,AP_SAT> AD_NN_IN_T; //Depr. model
@@ -21,9 +21,11 @@ typedef ap_fixed<8, 6, AP_RND_CONV, AP_SAT> AD_NN_IN_T;
 // typedef ap_fixed<12,10> AD_NN_IN_T;
 //  Assumed type for the NN output (anomaly score)
 //  typedef ap_fixed<16,6,AP_RND,AP_SAT> AD_NN_OUT_T; //Depr. model
-typedef ap_fixed<10, 7> AD_NN_OUT_T;
+typedef ap_fixed<10, 7, AP_RND_CONV, AP_SAT> AD_NN_OUT_T;
 typedef ap_ufixed<18, 14> AD_NN_OUT_SQ_T;
 // typedef ap_fixed<16,6> AD_NN_OUT_T;
+
+void scaleNNInputs(unscaled_t unscaled[AD_NNNINPUTS], AD_NN_IN_T scaled[AD_NNNINPUTS]);
 
 void anomaly_detection(Muon muons[NMUONS], Jet jets[NJETS], EGamma egammas[NEGAMMAS], Tau taus[NTAUS],
                        ET et, HT ht, ETMiss etmiss, HTMiss htmiss, ETHFMiss ethfmiss, HTHFMiss hthfmiss,

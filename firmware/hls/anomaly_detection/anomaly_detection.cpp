@@ -1,6 +1,7 @@
 #include "anomaly_detection.h"
 #include <stddef.h>
 #include "NN/VAE_HLS.h"
+#include "NN/nnet_utils/nnet_helpers.h"
 #include "NN/nnet_utils/nnet_common.h"
 #include "scales.h"
 
