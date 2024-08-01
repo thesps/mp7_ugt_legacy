@@ -32,6 +32,8 @@ set FILE_NAME {{MENU_DIR}}/../running.lock
 
 set BLK_MEM_GEN_VERSION $env(UGT_BLK_MEM_GEN_VERSION_SIM)
 
+set fileId [open $FILE_NAME "w"]
+
 ## Create and map work directory
 vlib work
 vmap work work
@@ -194,7 +196,6 @@ if {$VIEW_WAVE} {
   view wave
   do $TB_DIR/../scripts/gtl_fdl_wrapper_test_wave.do
 }
-set fileId [open $FILE_NAME "w"]
 close $fileId
 ##Run simulation
 run 91000 ns
