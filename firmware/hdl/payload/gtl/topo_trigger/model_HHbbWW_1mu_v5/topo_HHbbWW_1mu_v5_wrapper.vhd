@@ -39,6 +39,7 @@ architecture rtl of topo_HHbbWW_1mu_v5_wrapper is
     signal ap_rst: std_logic := '0';
     signal ap_start: std_logic := '1';
     signal topo: std_logic_vector(0 downto 0) := "0";
+    signal simulation_counter : integer := 0;
 
 begin
 
@@ -74,5 +75,16 @@ begin
     topo_out <= topo(0);
 
     topo_score_o(15 downto 0) <= topo_score;
+
+    process(clk)
+        file f : text open write_mode is "topo_HHbbWW_1mu_v5.txt";
+        variable l : line;
+    begin
+        if rising_edge(clk) then
+            simulation_counter <= simulation_counter + 1;
+            write(l, to_integer(unsigned(topo_score)));
+            writeline(f, l);
+        end if;
+    end process;
 
 end architecture rtl;
