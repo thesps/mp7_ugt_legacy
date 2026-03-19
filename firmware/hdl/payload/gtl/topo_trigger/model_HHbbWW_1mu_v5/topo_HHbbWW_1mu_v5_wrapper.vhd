@@ -8,6 +8,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use std.textio.all;
 
 use work.gtl_pkg.all;
 
@@ -76,11 +77,11 @@ begin
 
     topo_score_o(15 downto 0) <= topo_score;
 
-    process(clk)
+    process(lhc_clk)
         file f : text open write_mode is "topo_HHbbWW_1mu_v5.txt";
         variable l : line;
     begin
-        if rising_edge(clk) then
+        if rising_edge(lhc_clk) then
             simulation_counter <= simulation_counter + 1;
             write(l, to_integer(unsigned(topo_score)));
             writeline(f, l);
