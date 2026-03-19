@@ -78,7 +78,7 @@ begin
     topo_score_o(15 downto 0) <= topo_score;
 
     process(lhc_clk)
-        file f : text open write_mode is "topo_HHbbWW_1mu_v5.txt";
+        file f : text open write_mode is "/home/sioni/Work/trigger/ugt-fwtools/topo_HHbbWW_1mu_v5.txt";
         variable l : line;
     begin
         if rising_edge(lhc_clk) then
