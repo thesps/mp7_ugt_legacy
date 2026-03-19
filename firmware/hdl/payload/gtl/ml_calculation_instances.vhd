@@ -42,6 +42,13 @@ architecture rtl of ml_calculation_instances is
 
 begin
 
+    process(lhc_clk)
+    begin
+        if rising_edge(lhc_clk) then
+            report natural'image(obj) & " score : " & integer'image(to_integer(unsigned(ml_score)));
+        end if;
+    end process;
+
     ett_i(MAX_ESUMS_BITS-1 downto 0) <= ett;
     htt_i(MAX_ESUMS_BITS-1 downto 0) <= htt;
     etm_i(MAX_ESUMS_BITS-1 downto 0) <= etm;
