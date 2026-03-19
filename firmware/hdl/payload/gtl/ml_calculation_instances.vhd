@@ -45,7 +45,7 @@ begin
     process(lhc_clk)
     begin
         if rising_edge(lhc_clk) then
-            report natural'image(obj) & " score : " & integer'image(to_integer(unsigned(ml_score)));
+            report "obj " & natural'image(obj) & ", model " & natural'image(model) & ", score : " & integer'image(to_integer(unsigned(ml_score)));
         end if;
     end process;
 
