@@ -74,7 +74,7 @@ end;
 architecture behav of topo_HHbbWW_1mu_v5 is 
     attribute CORE_GENERATION_INFO : STRING;
     attribute CORE_GENERATION_INFO of behav : architecture is
-    "topo_HHbbWW_1mu_v5_topo_HHbbWW_1mu_v5,hls_ip_2024_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7vx690t-ffg1927-2,HLS_INPUT_CLOCK=25.000000,HLS_INPUT_ARCH=pipeline,HLS_SYN_CLOCK=24.955250,HLS_SYN_LAT=2,HLS_SYN_TPT=1,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=755,HLS_SYN_LUT=51285,HLS_VERSION=2024_1}";
+    "topo_HHbbWW_1mu_v5_topo_HHbbWW_1mu_v5,hls_ip_2024_1,{HLS_INPUT_TYPE=cxx,HLS_INPUT_FLOAT=0,HLS_INPUT_FIXED=0,HLS_INPUT_PART=xc7vx690t-ffg1927-2,HLS_INPUT_CLOCK=25.000000,HLS_INPUT_ARCH=pipeline,HLS_SYN_CLOCK=24.847250,HLS_SYN_LAT=2,HLS_SYN_TPT=1,HLS_SYN_MEM=0,HLS_SYN_DSP=0,HLS_SYN_FF=758,HLS_SYN_LUT=51285,HLS_VERSION=2024_1}";
     constant ap_const_logic_1 : STD_LOGIC := '1';
     constant ap_const_logic_0 : STD_LOGIC := '0';
     constant ap_ST_fsm_pp0_stage0 : STD_LOGIC_VECTOR (0 downto 0) := "1";
@@ -101,31 +101,71 @@ architecture behav of topo_HHbbWW_1mu_v5 is
     signal ap_enable_reg_pp0_iter2 : STD_LOGIC := '0';
     signal ap_idle_pp0 : STD_LOGIC;
     signal ap_block_pp0_stage0_subdone : BOOLEAN;
-    signal input_scaled_scaleNNInputs_fu_211_ap_return : STD_LOGIC_VECTOR (332 downto 0);
-    signal input_scaled_reg_431 : STD_LOGIC_VECTOR (332 downto 0);
+    signal input_scaled_reg_535 : STD_LOGIC_VECTOR (15 downto 0);
     signal ap_block_pp0_stage0_11001 : BOOLEAN;
-    signal input_scaled_scaleNNInputs_fu_211_ap_ready : STD_LOGIC;
-    signal input_scaled_scaleNNInputs_fu_211_p_read : STD_LOGIC_VECTOR (11 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read1 : STD_LOGIC_VECTOR (8 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read2 : STD_LOGIC_VECTOR (8 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read3 : STD_LOGIC_VECTOR (9 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read4 : STD_LOGIC_VECTOR (3 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read5 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read6 : STD_LOGIC_VECTOR (8 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read7 : STD_LOGIC_VECTOR (9 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read8 : STD_LOGIC_VECTOR (3 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read9 : STD_LOGIC_VECTOR (10 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read10 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read11 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read12 : STD_LOGIC_VECTOR (10 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read13 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read14 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read15 : STD_LOGIC_VECTOR (10 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read16 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read17 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read18 : STD_LOGIC_VECTOR (10 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read19 : STD_LOGIC_VECTOR (7 downto 0);
-    signal input_scaled_scaleNNInputs_fu_211_p_read20 : STD_LOGIC_VECTOR (7 downto 0);
+    signal input_scaled_1_reg_540 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_2_reg_545 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_3_reg_550 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_4_reg_555 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_5_reg_560 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_6_reg_565 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_7_reg_570 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_8_reg_575 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_9_reg_580 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_10_reg_585 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_11_reg_590 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_12_reg_595 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_13_reg_600 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_14_reg_605 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_15_reg_610 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_16_reg_615 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_17_reg_620 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_18_reg_625 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_19_reg_630 : STD_LOGIC_VECTOR (15 downto 0);
+    signal input_scaled_20_reg_635 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_ready : STD_LOGIC;
+    signal call_ret_scaleNNInputs_fu_211_p_read : STD_LOGIC_VECTOR (11 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read1 : STD_LOGIC_VECTOR (8 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read2 : STD_LOGIC_VECTOR (8 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read3 : STD_LOGIC_VECTOR (9 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read4 : STD_LOGIC_VECTOR (3 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read5 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read6 : STD_LOGIC_VECTOR (8 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read7 : STD_LOGIC_VECTOR (9 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read8 : STD_LOGIC_VECTOR (3 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read9 : STD_LOGIC_VECTOR (10 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read10 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read11 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read12 : STD_LOGIC_VECTOR (10 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read13 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read14 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read15 : STD_LOGIC_VECTOR (10 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read16 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read17 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read18 : STD_LOGIC_VECTOR (10 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read19 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_p_read20 : STD_LOGIC_VECTOR (7 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_0 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_1 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_2 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_3 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_4 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_5 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_6 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_7 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_8 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_9 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_10 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_11 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_12 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_13 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_14 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_15 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_16 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_17 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_18 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_19 : STD_LOGIC_VECTOR (15 downto 0);
+    signal call_ret_scaleNNInputs_fu_211_ap_return_20 : STD_LOGIC_VECTOR (15 downto 0);
     signal grp_TOPO_project_fu_236_ap_start : STD_LOGIC;
     signal grp_TOPO_project_fu_236_ap_done : STD_LOGIC;
     signal grp_TOPO_project_fu_236_ap_idle : STD_LOGIC;
@@ -133,7 +173,7 @@ architecture behav of topo_HHbbWW_1mu_v5 is
     signal grp_TOPO_project_fu_236_ap_return : STD_LOGIC_VECTOR (15 downto 0);
     signal ap_block_pp0_stage0_ignoreCallOp32 : BOOLEAN;
     signal grp_TOPO_project_fu_236_ap_start_reg : STD_LOGIC := '0';
-    signal ap_block_pp0_stage0_ignoreCallOp33 : BOOLEAN;
+    signal ap_block_pp0_stage0_ignoreCallOp54 : BOOLEAN;
     signal ap_block_pp0_stage0_01001 : BOOLEAN;
     signal ap_block_pp0_stage0 : BOOLEAN;
     signal ap_NS_fsm : STD_LOGIC_VECTOR (0 downto 0);
@@ -166,7 +206,27 @@ architecture behav of topo_HHbbWW_1mu_v5 is
         p_read18 : IN STD_LOGIC_VECTOR (10 downto 0);
         p_read19 : IN STD_LOGIC_VECTOR (7 downto 0);
         p_read20 : IN STD_LOGIC_VECTOR (7 downto 0);
-        ap_return : OUT STD_LOGIC_VECTOR (332 downto 0);
+        ap_return_0 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_1 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_2 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_3 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_4 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_5 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_6 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_7 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_8 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_9 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_10 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_11 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_12 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_13 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_14 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_15 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_16 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_17 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_18 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_19 : OUT STD_LOGIC_VECTOR (15 downto 0);
+        ap_return_20 : OUT STD_LOGIC_VECTOR (15 downto 0);
         ap_rst : IN STD_LOGIC );
     end component;
 
@@ -179,38 +239,78 @@ architecture behav of topo_HHbbWW_1mu_v5 is
         ap_done : OUT STD_LOGIC;
         ap_idle : OUT STD_LOGIC;
         ap_ready : OUT STD_LOGIC;
-        dropout_input_val1 : IN STD_LOGIC_VECTOR (332 downto 0);
+        dropout_input_0_val1 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_1_val2 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_2_val3 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_3_val4 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_4_val5 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_5_val6 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_6_val7 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_7_val8 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_8_val9 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_9_val10 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_10_val11 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_11_val12 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_12_val13 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_13_val14 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_14_val15 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_15_val16 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_16_val17 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_17_val18 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_18_val19 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_19_val20 : IN STD_LOGIC_VECTOR (15 downto 0);
+        dropout_input_20_val21 : IN STD_LOGIC_VECTOR (15 downto 0);
         ap_return : OUT STD_LOGIC_VECTOR (15 downto 0) );
     end component;
 
 
 
 begin
-    input_scaled_scaleNNInputs_fu_211 : component topo_HHbbWW_1mu_v5_scaleNNInputs
+    call_ret_scaleNNInputs_fu_211 : component topo_HHbbWW_1mu_v5_scaleNNInputs
     port map (
-        ap_ready => input_scaled_scaleNNInputs_fu_211_ap_ready,
-        p_read => input_scaled_scaleNNInputs_fu_211_p_read,
-        p_read1 => input_scaled_scaleNNInputs_fu_211_p_read1,
-        p_read2 => input_scaled_scaleNNInputs_fu_211_p_read2,
-        p_read3 => input_scaled_scaleNNInputs_fu_211_p_read3,
-        p_read4 => input_scaled_scaleNNInputs_fu_211_p_read4,
-        p_read5 => input_scaled_scaleNNInputs_fu_211_p_read5,
-        p_read6 => input_scaled_scaleNNInputs_fu_211_p_read6,
-        p_read7 => input_scaled_scaleNNInputs_fu_211_p_read7,
-        p_read8 => input_scaled_scaleNNInputs_fu_211_p_read8,
-        p_read9 => input_scaled_scaleNNInputs_fu_211_p_read9,
-        p_read10 => input_scaled_scaleNNInputs_fu_211_p_read10,
-        p_read11 => input_scaled_scaleNNInputs_fu_211_p_read11,
-        p_read12 => input_scaled_scaleNNInputs_fu_211_p_read12,
-        p_read13 => input_scaled_scaleNNInputs_fu_211_p_read13,
-        p_read14 => input_scaled_scaleNNInputs_fu_211_p_read14,
-        p_read15 => input_scaled_scaleNNInputs_fu_211_p_read15,
-        p_read16 => input_scaled_scaleNNInputs_fu_211_p_read16,
-        p_read17 => input_scaled_scaleNNInputs_fu_211_p_read17,
-        p_read18 => input_scaled_scaleNNInputs_fu_211_p_read18,
-        p_read19 => input_scaled_scaleNNInputs_fu_211_p_read19,
-        p_read20 => input_scaled_scaleNNInputs_fu_211_p_read20,
-        ap_return => input_scaled_scaleNNInputs_fu_211_ap_return,
+        ap_ready => call_ret_scaleNNInputs_fu_211_ap_ready,
+        p_read => call_ret_scaleNNInputs_fu_211_p_read,
+        p_read1 => call_ret_scaleNNInputs_fu_211_p_read1,
+        p_read2 => call_ret_scaleNNInputs_fu_211_p_read2,
+        p_read3 => call_ret_scaleNNInputs_fu_211_p_read3,
+        p_read4 => call_ret_scaleNNInputs_fu_211_p_read4,
+        p_read5 => call_ret_scaleNNInputs_fu_211_p_read5,
+        p_read6 => call_ret_scaleNNInputs_fu_211_p_read6,
+        p_read7 => call_ret_scaleNNInputs_fu_211_p_read7,
+        p_read8 => call_ret_scaleNNInputs_fu_211_p_read8,
+        p_read9 => call_ret_scaleNNInputs_fu_211_p_read9,
+        p_read10 => call_ret_scaleNNInputs_fu_211_p_read10,
+        p_read11 => call_ret_scaleNNInputs_fu_211_p_read11,
+        p_read12 => call_ret_scaleNNInputs_fu_211_p_read12,
+        p_read13 => call_ret_scaleNNInputs_fu_211_p_read13,
+        p_read14 => call_ret_scaleNNInputs_fu_211_p_read14,
+        p_read15 => call_ret_scaleNNInputs_fu_211_p_read15,
+        p_read16 => call_ret_scaleNNInputs_fu_211_p_read16,
+        p_read17 => call_ret_scaleNNInputs_fu_211_p_read17,
+        p_read18 => call_ret_scaleNNInputs_fu_211_p_read18,
+        p_read19 => call_ret_scaleNNInputs_fu_211_p_read19,
+        p_read20 => call_ret_scaleNNInputs_fu_211_p_read20,
+        ap_return_0 => call_ret_scaleNNInputs_fu_211_ap_return_0,
+        ap_return_1 => call_ret_scaleNNInputs_fu_211_ap_return_1,
+        ap_return_2 => call_ret_scaleNNInputs_fu_211_ap_return_2,
+        ap_return_3 => call_ret_scaleNNInputs_fu_211_ap_return_3,
+        ap_return_4 => call_ret_scaleNNInputs_fu_211_ap_return_4,
+        ap_return_5 => call_ret_scaleNNInputs_fu_211_ap_return_5,
+        ap_return_6 => call_ret_scaleNNInputs_fu_211_ap_return_6,
+        ap_return_7 => call_ret_scaleNNInputs_fu_211_ap_return_7,
+        ap_return_8 => call_ret_scaleNNInputs_fu_211_ap_return_8,
+        ap_return_9 => call_ret_scaleNNInputs_fu_211_ap_return_9,
+        ap_return_10 => call_ret_scaleNNInputs_fu_211_ap_return_10,
+        ap_return_11 => call_ret_scaleNNInputs_fu_211_ap_return_11,
+        ap_return_12 => call_ret_scaleNNInputs_fu_211_ap_return_12,
+        ap_return_13 => call_ret_scaleNNInputs_fu_211_ap_return_13,
+        ap_return_14 => call_ret_scaleNNInputs_fu_211_ap_return_14,
+        ap_return_15 => call_ret_scaleNNInputs_fu_211_ap_return_15,
+        ap_return_16 => call_ret_scaleNNInputs_fu_211_ap_return_16,
+        ap_return_17 => call_ret_scaleNNInputs_fu_211_ap_return_17,
+        ap_return_18 => call_ret_scaleNNInputs_fu_211_ap_return_18,
+        ap_return_19 => call_ret_scaleNNInputs_fu_211_ap_return_19,
+        ap_return_20 => call_ret_scaleNNInputs_fu_211_ap_return_20,
         ap_rst => ap_rst);
 
     grp_TOPO_project_fu_236 : component topo_HHbbWW_1mu_v5_TOPO_project
@@ -221,7 +321,27 @@ begin
         ap_done => grp_TOPO_project_fu_236_ap_done,
         ap_idle => grp_TOPO_project_fu_236_ap_idle,
         ap_ready => grp_TOPO_project_fu_236_ap_ready,
-        dropout_input_val1 => input_scaled_reg_431,
+        dropout_input_0_val1 => input_scaled_reg_535,
+        dropout_input_1_val2 => input_scaled_1_reg_540,
+        dropout_input_2_val3 => input_scaled_2_reg_545,
+        dropout_input_3_val4 => input_scaled_3_reg_550,
+        dropout_input_4_val5 => input_scaled_4_reg_555,
+        dropout_input_5_val6 => input_scaled_5_reg_560,
+        dropout_input_6_val7 => input_scaled_6_reg_565,
+        dropout_input_7_val8 => input_scaled_7_reg_570,
+        dropout_input_8_val9 => input_scaled_8_reg_575,
+        dropout_input_9_val10 => input_scaled_9_reg_580,
+        dropout_input_10_val11 => input_scaled_10_reg_585,
+        dropout_input_11_val12 => input_scaled_11_reg_590,
+        dropout_input_12_val13 => input_scaled_12_reg_595,
+        dropout_input_13_val14 => input_scaled_13_reg_600,
+        dropout_input_14_val15 => input_scaled_14_reg_605,
+        dropout_input_15_val16 => input_scaled_15_reg_610,
+        dropout_input_16_val17 => input_scaled_16_reg_615,
+        dropout_input_17_val18 => input_scaled_17_reg_620,
+        dropout_input_18_val19 => input_scaled_18_reg_625,
+        dropout_input_19_val20 => input_scaled_19_reg_630,
+        dropout_input_20_val21 => input_scaled_20_reg_635,
         ap_return => grp_TOPO_project_fu_236_ap_return);
 
 
@@ -287,7 +407,27 @@ begin
     begin
         if (ap_clk'event and ap_clk = '1') then
             if (((ap_const_boolean_0 = ap_block_pp0_stage0_11001) and (ap_const_logic_1 = ap_CS_fsm_pp0_stage0))) then
-                input_scaled_reg_431 <= input_scaled_scaleNNInputs_fu_211_ap_return;
+                input_scaled_10_reg_585 <= call_ret_scaleNNInputs_fu_211_ap_return_10;
+                input_scaled_11_reg_590 <= call_ret_scaleNNInputs_fu_211_ap_return_11;
+                input_scaled_12_reg_595 <= call_ret_scaleNNInputs_fu_211_ap_return_12;
+                input_scaled_13_reg_600 <= call_ret_scaleNNInputs_fu_211_ap_return_13;
+                input_scaled_14_reg_605 <= call_ret_scaleNNInputs_fu_211_ap_return_14;
+                input_scaled_15_reg_610 <= call_ret_scaleNNInputs_fu_211_ap_return_15;
+                input_scaled_16_reg_615 <= call_ret_scaleNNInputs_fu_211_ap_return_16;
+                input_scaled_17_reg_620 <= call_ret_scaleNNInputs_fu_211_ap_return_17;
+                input_scaled_18_reg_625 <= call_ret_scaleNNInputs_fu_211_ap_return_18;
+                input_scaled_19_reg_630 <= call_ret_scaleNNInputs_fu_211_ap_return_19;
+                input_scaled_1_reg_540 <= call_ret_scaleNNInputs_fu_211_ap_return_1;
+                input_scaled_20_reg_635 <= call_ret_scaleNNInputs_fu_211_ap_return_20;
+                input_scaled_2_reg_545 <= call_ret_scaleNNInputs_fu_211_ap_return_2;
+                input_scaled_3_reg_550 <= call_ret_scaleNNInputs_fu_211_ap_return_3;
+                input_scaled_4_reg_555 <= call_ret_scaleNNInputs_fu_211_ap_return_4;
+                input_scaled_5_reg_560 <= call_ret_scaleNNInputs_fu_211_ap_return_5;
+                input_scaled_6_reg_565 <= call_ret_scaleNNInputs_fu_211_ap_return_6;
+                input_scaled_7_reg_570 <= call_ret_scaleNNInputs_fu_211_ap_return_7;
+                input_scaled_8_reg_575 <= call_ret_scaleNNInputs_fu_211_ap_return_8;
+                input_scaled_9_reg_580 <= call_ret_scaleNNInputs_fu_211_ap_return_9;
+                input_scaled_reg_535 <= call_ret_scaleNNInputs_fu_211_ap_return_0;
             end if;
         end if;
     end process;
@@ -306,7 +446,7 @@ begin
         ap_block_pp0_stage0_01001 <= not((ap_const_boolean_1 = ap_const_boolean_1));
         ap_block_pp0_stage0_11001 <= not((ap_const_boolean_1 = ap_const_boolean_1));
         ap_block_pp0_stage0_ignoreCallOp32 <= not((ap_const_boolean_1 = ap_const_boolean_1));
-        ap_block_pp0_stage0_ignoreCallOp33 <= not((ap_const_boolean_1 = ap_const_boolean_1));
+        ap_block_pp0_stage0_ignoreCallOp54 <= not((ap_const_boolean_1 = ap_const_boolean_1));
         ap_block_pp0_stage0_subdone <= not((ap_const_boolean_1 = ap_const_boolean_1));
 
     ap_done_assign_proc : process(ap_enable_reg_pp0_iter2, ap_block_pp0_stage0_subdone)
@@ -363,35 +503,35 @@ begin
 
     ap_reset_idle_pp0_assign_proc : process(ap_start, ap_idle_pp0_0to1)
     begin
-        if (((ap_start = ap_const_logic_0) and (ap_idle_pp0_0to1 = ap_const_logic_1))) then 
+        if (((ap_idle_pp0_0to1 = ap_const_logic_1) and (ap_start = ap_const_logic_0))) then 
             ap_reset_idle_pp0 <= ap_const_logic_1;
         else 
             ap_reset_idle_pp0 <= ap_const_logic_0;
         end if; 
     end process;
 
+    call_ret_scaleNNInputs_fu_211_p_read <= ht(12 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read1 <= muons_0(18 downto 10);
+    call_ret_scaleNNInputs_fu_211_p_read10 <= jets_0(18 downto 11);
+    call_ret_scaleNNInputs_fu_211_p_read11 <= jets_0(26 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read12 <= jets_1(11 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read13 <= jets_1(18 downto 11);
+    call_ret_scaleNNInputs_fu_211_p_read14 <= jets_1(26 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read15 <= jets_2(11 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read16 <= jets_2(18 downto 11);
+    call_ret_scaleNNInputs_fu_211_p_read17 <= jets_2(26 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read18 <= jets_3(11 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read19 <= jets_3(18 downto 11);
+    call_ret_scaleNNInputs_fu_211_p_read2 <= muons_0(31 downto 23);
+    call_ret_scaleNNInputs_fu_211_p_read20 <= jets_3(26 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read3 <= muons_0(10 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read4 <= muons_0(22 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read5 <= muons_1(17 downto 10);
+    call_ret_scaleNNInputs_fu_211_p_read6 <= muons_1(31 downto 23);
+    call_ret_scaleNNInputs_fu_211_p_read7 <= muons_1(10 - 1 downto 0);
+    call_ret_scaleNNInputs_fu_211_p_read8 <= muons_1(22 downto 19);
+    call_ret_scaleNNInputs_fu_211_p_read9 <= jets_0(11 - 1 downto 0);
     grp_TOPO_project_fu_236_ap_start <= grp_TOPO_project_fu_236_ap_start_reg;
-    input_scaled_scaleNNInputs_fu_211_p_read <= ht(12 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read1 <= muons_0(18 downto 10);
-    input_scaled_scaleNNInputs_fu_211_p_read10 <= jets_0(18 downto 11);
-    input_scaled_scaleNNInputs_fu_211_p_read11 <= jets_0(26 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read12 <= jets_1(11 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read13 <= jets_1(18 downto 11);
-    input_scaled_scaleNNInputs_fu_211_p_read14 <= jets_1(26 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read15 <= jets_2(11 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read16 <= jets_2(18 downto 11);
-    input_scaled_scaleNNInputs_fu_211_p_read17 <= jets_2(26 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read18 <= jets_3(11 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read19 <= jets_3(18 downto 11);
-    input_scaled_scaleNNInputs_fu_211_p_read2 <= muons_0(31 downto 23);
-    input_scaled_scaleNNInputs_fu_211_p_read20 <= jets_3(26 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read3 <= muons_0(10 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read4 <= muons_0(22 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read5 <= muons_1(17 downto 10);
-    input_scaled_scaleNNInputs_fu_211_p_read6 <= muons_1(31 downto 23);
-    input_scaled_scaleNNInputs_fu_211_p_read7 <= muons_1(10 - 1 downto 0);
-    input_scaled_scaleNNInputs_fu_211_p_read8 <= muons_1(22 downto 19);
-    input_scaled_scaleNNInputs_fu_211_p_read9 <= jets_0(11 - 1 downto 0);
     topo_score <= grp_TOPO_project_fu_236_ap_return;
 
     topo_score_ap_vld_assign_proc : process(ap_enable_reg_pp0_iter2, ap_block_pp0_stage0_11001)
