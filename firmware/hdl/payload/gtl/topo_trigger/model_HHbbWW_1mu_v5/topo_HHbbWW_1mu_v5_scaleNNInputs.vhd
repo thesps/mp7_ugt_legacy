@@ -292,31 +292,4 @@ begin
     zext_ln22_fu_294_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp0_fu_286_p3),22));
     zext_ln24_fu_482_p1 <= std_logic_vector(IEEE.numeric_std.resize(unsigned(tmp1_8_fu_474_p3),16));
 
-    process(ap_clk)
-    begin
-        if rising_edge(ap_clk) then
-            report "X0 : " & integer'image(to_integer(signed(p_read)));
-            report "X1 : " & integer'image(to_integer(signed(p_read1)));
-            report "X2 : " & integer'image(to_integer(signed(p_read2)));
-            report "X3 : " & integer'image(to_integer(signed(p_read3)));
-            report "X4 : " & integer'image(to_integer(signed(p_read4)));
-            report "X5 : " & integer'image(to_integer(signed(p_read5)));
-            report "X6 : " & integer'image(to_integer(signed(p_read6)));
-            report "X7 : " & integer'image(to_integer(signed(p_read7)));
-            report "X8 : " & integer'image(to_integer(signed(p_read8)));
-            report "X9 : " & integer'image(to_integer(signed(p_read9)));
-            report "X10 : " & integer'image(to_integer(signed(p_read10)));
-            report "X11 : " & integer'image(to_integer(signed(p_read11)));
-            report "X12 : " & integer'image(to_integer(signed(p_read12)));
-            report "X13 : " & integer'image(to_integer(signed(p_read13)));
-            report "X14 : " & integer'image(to_integer(signed(p_read14)));
-            report "X15 : " & integer'image(to_integer(signed(p_read15)));
-            report "X16 : " & integer'image(to_integer(signed(p_read16)));
-            report "X17 : " & integer'image(to_integer(signed(p_read17)));
-            report "X18 : " & integer'image(to_integer(signed(p_read18)));
-            report "X19 : " & integer'image(to_integer(signed(p_read19)));
-            report "X20 : " & integer'image(to_integer(signed(p_read20)));
-        end if;
-    end process;
-
 end behav;

@@ -543,4 +543,31 @@ begin
         end if; 
     end process;
 
+    process(ap_clk)
+    begin
+        if rising_edge(ap_clk) then
+            report "X0 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read)));
+            report "X1 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read1)));
+            report "X2 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read2)));
+            report "X3 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read3)));
+            report "X4 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read4)));
+            report "X5 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read5)));
+            report "X6 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read6)));
+            report "X7 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read7)));
+            report "X8 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read8)));
+            report "X9 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read9)));
+            report "X10 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read10)));
+            report "X11 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read11)));
+            report "X12 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read12)));
+            report "X13 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read13)));
+            report "X14 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read14)));
+            report "X15 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read15)));
+            report "X16 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read16)));
+            report "X17 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read17)));
+            report "X18 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read18)));
+            report "X19 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read19)));
+            report "X20 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read20)));
+        end if;
+    end process;
+
 end behav;
