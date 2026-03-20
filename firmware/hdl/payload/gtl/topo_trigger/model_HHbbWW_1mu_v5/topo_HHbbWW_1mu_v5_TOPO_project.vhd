@@ -1902,26 +1902,26 @@ begin
     begin
         if rising_edge(ap_clk) then
             report "X0 : " & integer'image(to_integer(signed(dropout_input_0_val1)));
-            report "X1 : " & integer'image(to_integer(signed(dropout_input_0_val2)));
-            report "X2 : " & integer'image(to_integer(signed(dropout_input_0_val3)));
-            report "X3 : " & integer'image(to_integer(signed(dropout_input_0_val4)));
-            report "X4 : " & integer'image(to_integer(signed(dropout_input_0_val5)));
-            report "X5 : " & integer'image(to_integer(signed(dropout_input_0_val6)));
-            report "X6 : " & integer'image(to_integer(signed(dropout_input_0_val7)));
-            report "X7 : " & integer'image(to_integer(signed(dropout_input_0_val8)));
-            report "X8 : " & integer'image(to_integer(signed(dropout_input_0_val9)));
-            report "X9 : " & integer'image(to_integer(signed(dropout_input_0_val10)));
-            report "X10 : " & integer'image(to_integer(signed(dropout_input_0_val11)));
-            report "X11 : " & integer'image(to_integer(signed(dropout_input_0_val12)));
-            report "X12 : " & integer'image(to_integer(signed(dropout_input_0_val13)));
-            report "X13 : " & integer'image(to_integer(signed(dropout_input_0_val14)));
-            report "X14 : " & integer'image(to_integer(signed(dropout_input_0_val15)));
-            report "X15 : " & integer'image(to_integer(signed(dropout_input_0_val16)));
-            report "X16 : " & integer'image(to_integer(signed(dropout_input_0_val17)));
-            report "X17 : " & integer'image(to_integer(signed(dropout_input_0_val18)));
-            report "X18 : " & integer'image(to_integer(signed(dropout_input_0_val19)));
-            report "X19 : " & integer'image(to_integer(signed(dropout_input_0_val20)));
-            report "X20 : " & integer'image(to_integer(signed(dropout_input_0_val21)));
+            report "X1 : " & integer'image(to_integer(signed(dropout_input_1_val2)));
+            report "X2 : " & integer'image(to_integer(signed(dropout_input_2_val3)));
+            report "X3 : " & integer'image(to_integer(signed(dropout_input_3_val4)));
+            report "X4 : " & integer'image(to_integer(signed(dropout_input_4_val5)));
+            report "X5 : " & integer'image(to_integer(signed(dropout_input_5_val6)));
+            report "X6 : " & integer'image(to_integer(signed(dropout_input_6_val7)));
+            report "X7 : " & integer'image(to_integer(signed(dropout_input_7_val8)));
+            report "X8 : " & integer'image(to_integer(signed(dropout_input_8_val9)));
+            report "X9 : " & integer'image(to_integer(signed(dropout_input_9_val10)));
+            report "X10 : " & integer'image(to_integer(signed(dropout_input_10_val11)));
+            report "X11 : " & integer'image(to_integer(signed(dropout_input_11_val12)));
+            report "X12 : " & integer'image(to_integer(signed(dropout_input_12_val13)));
+            report "X13 : " & integer'image(to_integer(signed(dropout_input_13_val14)));
+            report "X14 : " & integer'image(to_integer(signed(dropout_input_14_val15)));
+            report "X15 : " & integer'image(to_integer(signed(dropout_input_15_val16)));
+            report "X16 : " & integer'image(to_integer(signed(dropout_input_16_val17)));
+            report "X17 : " & integer'image(to_integer(signed(dropout_input_17_val18)));
+            report "X18 : " & integer'image(to_integer(signed(dropout_input_18_val19)));
+            report "X19 : " & integer'image(to_integer(signed(dropout_input_19_val20)));
+            report "X20 : " & integer'image(to_integer(signed(dropout_input_20_val21)));
         end if;
     end process;
 
