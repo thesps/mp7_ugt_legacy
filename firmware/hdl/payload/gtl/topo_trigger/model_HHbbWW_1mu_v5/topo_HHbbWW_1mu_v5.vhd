@@ -546,27 +546,27 @@ begin
     process(ap_clk)
     begin
         if rising_edge(ap_clk) then
-            report "X0 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read)));
-            report "X1 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read1)));
-            report "X2 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read2)));
-            report "X3 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read3)));
-            report "X4 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read4)));
-            report "X5 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read5)));
-            report "X6 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read6)));
-            report "X7 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read7)));
-            report "X8 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read8)));
-            report "X9 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read9)));
-            report "X10 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read10)));
-            report "X11 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read11)));
-            report "X12 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read12)));
-            report "X13 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read13)));
-            report "X14 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read14)));
-            report "X15 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read15)));
-            report "X16 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read16)));
-            report "X17 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read17)));
-            report "X18 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read18)));
-            report "X19 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read19)));
-            report "X20 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read20)));
+            report "X0 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read)));    -- ht (unsigned)
+            report "X1 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read1)));   -- muon0 pt (unsigned)
+            report "X2 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read2)));     -- muon0 eta (signed)
+            report "X3 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read3)));   -- muon0 phi (unsigned)
+            report "X4 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read4)));   -- muon0 qual (unsigned)
+            report "X5 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read5)));   -- muon1 pt (unsigned)
+            report "X6 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read6)));     -- muon1 eta (signed)
+            report "X7 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read7)));   -- muon1 phi (unsigned)
+            report "X8 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read8)));   -- muon1 qual (unsigned)
+            report "X9 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read9)));   -- jet0 et (unsigned)
+            report "X10 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read10)));   -- jet0 eta (signed)
+            report "X11 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read11))); -- jet0 phi (unsigned)
+            report "X12 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read12))); -- jet1 et (unsigned)
+            report "X13 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read13)));   -- jet1 eta (signed)
+            report "X14 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read14))); -- jet1 phi (unsigned)
+            report "X15 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read15))); -- jet2 et (unsigned)
+            report "X16 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read16)));   -- jet2 eta (signed)
+            report "X17 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read17))); -- jet2 phi (unsigned)
+            report "X18 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read18))); -- jet3 et (unsigned)
+            report "X19 : " & integer'image(to_integer(signed(call_ret_scaleNNInputs_fu_211_p_read19)));   -- jet3 eta (signed)
+            report "X20 : " & integer'image(to_integer(unsigned(call_ret_scaleNNInputs_fu_211_p_read20))); -- jet3 phi (unsigned)
         end if;
     end process;
 
